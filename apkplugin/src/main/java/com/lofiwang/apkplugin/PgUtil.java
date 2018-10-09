@@ -16,7 +16,6 @@ public class PgUtil {
     private static final String TAG = "PgUtil";
 
     public static DexClassLoader createDexClassLoader(Context context, String apkPath) {
-        // 4.1以后不能够将optimizedDirectory设置到sd卡目录， 否则抛出异常.
         File optimizedDirectoryFile = context.getDir("dex", Context.MODE_PRIVATE);
         return new DexClassLoader(apkPath, optimizedDirectoryFile.getAbsolutePath(), null, context.getClassLoader());
     }
