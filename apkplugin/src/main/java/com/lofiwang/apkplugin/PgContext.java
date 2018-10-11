@@ -27,8 +27,7 @@ public class PgContext extends ContextWrapper {
         mPluginApkPath = pluginApkPath;
         AssetManager assetManager = PgUtil.createAssetManager(pluginApkPath);
         mResources = PgUtil.createResources(base, assetManager);
-        Resources.Theme theme = PgUtil.createTheme(base, base.getResources());
-        mTheme = theme;
+        mTheme = PgUtil.createTheme(base, base.getResources());
         updateLocaleConfig(getBaseContext(), getBaseContext().getResources());
     }
 
@@ -67,9 +66,9 @@ public class PgContext extends ContextWrapper {
     }
 
     @Override
-    public void setTheme(int resid) {
-        if (mThemeResource != resid) {
-            mThemeResource = resid;
+    public void setTheme(int resId) {
+        if (mThemeResource != resId) {
+            mThemeResource = resId;
             initializeTheme();
         }
     }
