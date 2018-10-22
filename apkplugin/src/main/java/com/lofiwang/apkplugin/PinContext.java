@@ -13,21 +13,21 @@ import java.util.Locale;
 /**
  * Created by lofiwang
  */
-public class PgContext extends ContextWrapper {
-    private static final String TAG = "PgContext";
+public class PinContext extends ContextWrapper {
     private int mThemeResource;
     private Resources.Theme mTheme;
     private LayoutInflater mInflater;
     private Resources mResources;
+    private ClassLoader mClassLoader;
     private String mPluginApkPath;
     private String mPluginPkgName;
 
-    public PgContext(Context base, String pluginApkPath) {
+    public PinContext(Context base, String pluginApkPath) {
         super(base);
         mPluginApkPath = pluginApkPath;
-        AssetManager assetManager = PgUtil.createAssetManager(pluginApkPath);
-        mResources = PgUtil.createResources(base, assetManager);
-        mTheme = PgUtil.createTheme(base, base.getResources());
+        AssetManager assetManager = PinUtil.createAssetManager(pluginApkPath);
+        mResources = PinUtil.createResources(base, assetManager);
+        mTheme = PinUtil.createTheme(base, mResources);
         updateLocaleConfig(getBaseContext(), getBaseContext().getResources());
     }
 
@@ -37,7 +37,10 @@ public class PgContext extends ContextWrapper {
 
     @Override
     public ClassLoader getClassLoader() {
-        return PgUtil.createDexClassLoader(getBaseContext(), mPluginApkPath);
+        if (mClassLoader == null) {
+            mClassLoader = PinUtil.createDexClassLoader(getBaseContext(), mPluginApkPath);;
+        }
+        return mClassLoader;
     }
 
     @Override
@@ -82,7 +85,7 @@ public class PgContext extends ContextWrapper {
     public Object getSystemService(String name) {
         if (LAYOUT_INFLATER_SERVICE.equals(name)) {
             if (mInflater == null) {
-                mInflater = new PgLayoutInflater(this);
+                mInflater = new PinLayoutInflater(this);
             }
             return mInflater;
         }

@@ -12,8 +12,8 @@ import dalvik.system.DexClassLoader;
 /**
  * Created by lofiwang
  */
-public class PgUtil {
-    private static final String TAG = "PgUtil";
+public class PinUtil {
+    private static final String TAG = "PinUtil";
 
     public static DexClassLoader createDexClassLoader(Context context, String apkPath) {
         File optimizedDirectoryFile = context.getDir("dex", Context.MODE_PRIVATE);
@@ -41,7 +41,7 @@ public class PgUtil {
 
     public static Resources.Theme createTheme(Context context, Resources resources) {
         Resources.Theme theme = resources.newTheme();
-        theme.setTo(context.getTheme());
+//        theme.setTo(context.getTheme());
         return theme;
     }
 }

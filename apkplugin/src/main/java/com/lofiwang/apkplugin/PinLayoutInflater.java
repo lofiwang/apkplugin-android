@@ -4,23 +4,21 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
-
 /**
  * Created by lofiwang
  */
-public class PgLayoutInflater extends LayoutInflater {
-    private static final String TAG = "PgLayoutInflater";
+public class PinLayoutInflater extends LayoutInflater {
     private static final String[] sClassPrefixList = {
             "android.widget.",
             "android.webkit.",
             "android.app."
     };
 
-    public PgLayoutInflater(Context context) {
+    public PinLayoutInflater(Context context) {
         super(context);
     }
 
-    protected PgLayoutInflater(LayoutInflater original, Context newContext) {
+    protected PinLayoutInflater(LayoutInflater original, Context newContext) {
         super(original, newContext);
     }
 
@@ -40,8 +38,9 @@ public class PgLayoutInflater extends LayoutInflater {
         return super.onCreateView(name, attrs);
     }
 
+    @Override
     public LayoutInflater cloneInContext(Context newContext) {
-        return new PgLayoutInflater(this, newContext);
+        return new PinLayoutInflater(this, newContext);
     }
 }
 
