@@ -1,3 +1,8 @@
-# apkplugin-android
+# 动态加载未安装APK
 
-dynamic load uninstalled apk
+### 问题点
+* 类加载
+* 资源加载
+* 布局加载
+* 主题
+* 权限
